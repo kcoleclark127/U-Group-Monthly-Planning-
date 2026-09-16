@@ -324,6 +324,32 @@
     margin:0 0 16px;
   }
 
+  .fallback-notice{
+    background:#fff7ea;
+    border:1px solid var(--tan);
+    color:#5c4520;
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:15px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  .btn-ghost-inline{
+    background:transparent;
+    border:1px solid var(--tan);
+    color:#5c4520;
+    border-radius:6px;
+    padding:5px 10px;
+    font-size:14px;
+    font-family:'Barlow Condensed', sans-serif;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+
   /* ---------- Loading overlay ---------- */
 
   .loading-overlay{
@@ -1009,6 +1035,45 @@
     errorBox.scrollIntoView({ behavior:'smooth', block:'center' });
   }
 
+  // If the /api/generate call fails, hangs, or isn't deployed at all, the
+  // leader still gets their printable plan — built straight from what they
+  // typed, no AI step required. This mirrors what the API is asked to do
+  // anyway (just reorganize, never invent), so the fallback and the AI
+  // path produce the same shape of document.
+  function localFallbackFormat(data){
+    return {
+      header: {
+        leaders: data.leaders,
+        groupType: data.groupType,
+        monthSeason: data.monthSeason,
+        groupDates: data.groupDates,
+        allGroupDate: data.allGroupDate
+      },
+      weeks: data.weeks,
+      bucketList: {
+        activities: data.bucketActivities,
+        customIdea: data.bucketCustomIdea,
+        questions: data.bucketQuestions
+      }
+    };
+  }
+
+  function showOutput(result, usedFallback){
+    renderDoc(result);
+    if (usedFallback){
+      var notice = document.createElement('div');
+      notice.className = 'fallback-notice no-print';
+      notice.innerHTML = 'The AI formatting step didn&#39;t respond, so this was built directly from what you typed — nothing is missing. <button type="button" id="dismissNotice" class="btn-ghost-inline">Dismiss</button>';
+      var docEl = document.getElementById('docContent');
+      docEl.insertBefore(notice, docEl.firstChild);
+      document.getElementById('dismissNotice').addEventListener('click', function(){ notice.remove(); });
+    }
+    formView.style.display = 'none';
+    formActionBar.style.display = 'none';
+    outputView.style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
   generateBtn.addEventListener('click', function(){
     errorBox.hidden = true;
     var data = collectFormData();
@@ -1021,10 +1086,17 @@
     loadingOverlay.hidden = false;
     generateBtn.disabled = true;
 
+    // Guard against a request that never settles (e.g. the API route isn't
+    // deployed, or the function hangs) — without this, fetch() will wait
+    // forever and the "Organizing your plan…" screen never goes away.
+    var controller = ('AbortController' in window) ? new AbortController() : null;
+    var timeoutId = controller ? setTimeout(function(){ controller.abort(); }, 25000) : null;
+
     fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      signal: controller ? controller.signal : undefined
     })
     .then(function(res){
       return res.json().then(function(body){
@@ -1033,14 +1105,13 @@
       });
     })
     .then(function(result){
-      renderDoc(result);
-      formView.style.display = 'none';
-      formActionBar.style.display = 'none';
-      outputView.style.display = 'block';
-      window.scrollTo(0,0);
+      if (timeoutId) clearTimeout(timeoutId);
+      showOutput(result, false);
     })
     .catch(function(err){
-      showError(err.message || 'Something went wrong generating the plan. Please try again.');
+      if (timeoutId) clearTimeout(timeoutId);
+      console.warn('AI formatting step failed, falling back to local formatting:', err);
+      showOutput(localFallbackFormat(data), true);
     })
     .finally(function(){
       loadingOverlay.hidden = true;
