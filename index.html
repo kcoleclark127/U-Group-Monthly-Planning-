@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-Group Monthly Plan — Uproar Youth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  :root{
+    --bg:#ffffff;
+    --text:#1a1816;
+    --orange:#c95520;
+    --blue:#2e8fe8;
+    --tan:#b8935a;
+    --muted:#888078;
+    --card:#f7f5f1;
+    --border: #e5e1d8;
+    --radius: 10px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Barlow Condensed', sans-serif;
+  }
+
+  body{
+    padding-bottom:96px; /* room for sticky action bar */
+  }
+
+  h1,h2,h3,legend{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+
+  p{ margin:0; }
+
+  /* ---------- Top bar ---------- */
+
+  .topbar{
+    padding:28px 20px 20px;
+    border-bottom:3px solid var(--text);
+  }
+
+  .topbar .eyebrow{
+    font-size:15px;
+    font-weight:600;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+
+  .topbar h1{
+    font-size:clamp(32px, 8vw, 44px);
+    line-height:0.95;
+    margin-top:2px;
+  }
+
+  .topbar h1 .accent{ color:var(--orange); }
+
+  /* ---------- Layout ---------- */
+
+  main{
+    max-width:640px;
+    margin:0 auto;
+    padding:20px 16px 8px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:22px 18px;
+    margin-bottom:20px;
+  }
+
+  .card-title{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:4px;
+  }
+
+  .card-title h2{
+    font-size:26px;
+  }
+
+  .card-title .card-icon{
+    font-size:22px;
+  }
+
+  .card-sub{
+    color:var(--muted);
+    font-size:16px;
+    margin-bottom:18px;
+    line-height:1.3;
+  }
+
+  /* ---------- Fields ---------- */
+
+  .field{
+    margin-bottom:16px;
+  }
+
+  .field:last-child{ margin-bottom:0; }
+
+  label{
+    display:block;
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+
+  label .hint{
+    display:block;
+    font-weight:400;
+    font-size:14px;
+    color:var(--muted);
+    margin-top:2px;
+  }
+
+  input[type="text"],
+  select,
+  textarea{
+    width:100%;
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:17px;
+    padding:11px 12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:#fff;
+    color:var(--text);
+  }
+
+  input[type="text"]:focus,
+  select:focus,
+  textarea:focus{
+    outline:2px solid var(--blue);
+    outline-offset:1px;
+  }
+
+  textarea{
+    resize:vertical;
+    min-height:64px;
+  }
+
+  .checkbox-row{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin-top:8px;
+    font-size:15px;
+  }
+
+  .checkbox-row input[type="checkbox"]{
+    width:19px;
+    height:19px;
+    margin-top:2px;
+    flex-shrink:0;
+    accent-color:var(--orange);
+  }
+
+  .checkbox-row label{
+    font-weight:400;
+    font-size:15px;
+    margin-bottom:0;
+  }
+
+  /* Field-group colored labels — echoes the Fun / Family / Faith framework */
+  .field.fun label{ color:var(--orange); }
+  .field.family label{ color:var(--blue); }
+  .field.faith label{ color:var(--tan); }
+
+  .sub-block{
+    border-top:1px solid var(--border);
+    margin-top:16px;
+    padding-top:14px;
+  }
+
+  .sub-block-title{
+    font-weight:600;
+    font-size:15px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-bottom:8px;
+  }
+
+  /* ---------- Week cards ---------- */
+
+  .week-card .card-title h2{ color:var(--text); }
+
+  .week-number{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:var(--text);
+    color:#fff;
+    font-size:17px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+
+  /* ---------- Bucket list ---------- */
+
+  .bucket-category{
+    margin-bottom:18px;
+  }
+
+  .bucket-category h3{
+    font-size:19px;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+  }
+
+  .bucket-options{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+
+  .bucket-note{
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:14px;
+    line-height:1.4;
+  }
+
+  .question-level{
+    margin-bottom:18px;
+  }
+
+  .question-level h3{
+    font-size:19px;
+    margin-bottom:8px;
+  }
+
+  .question-level.level-1 h3{ color:#4a9a5c; }
+  .question-level.level-2 h3{ color:#c9962a; }
+  .question-level.level-3 h3{ color:#c9433a; }
+
+  .question-limit-note{
+    font-size:14px;
+    font-weight:600;
+    color:var(--text);
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:9px 12px;
+    margin-bottom:14px;
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .btn{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:19px;
+    font-weight:700;
+    letter-spacing:0.01em;
+    border:none;
+    border-radius:8px;
+    padding:14px 20px;
+    cursor:pointer;
+  }
+
+  .btn-primary{
+    background:var(--orange);
+    color:#fff;
+    width:100%;
+  }
+
+  .btn-primary:disabled{
+    background:#d7ab98;
+    cursor:not-allowed;
+  }
+
+  .btn-secondary{
+    background:#fff;
+    color:var(--text);
+    border:1.5px solid var(--text);
+  }
+
+  .btn-ghost{
+    background:transparent;
+    color:var(--muted);
+    border:1.5px solid var(--border);
+  }
+
+  .action-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#fff;
+    border-top:2px solid var(--text);
+    padding:12px 16px;
+    z-index:20;
+  }
+
+  .action-bar-inner{
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  .error-box{
+    background:#fbe9e6;
+    border:1px solid var(--orange);
+    color:#7a2c10;
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:15px;
+    margin:0 0 16px;
+  }
+
+  /* ---------- Loading overlay ---------- */
+
+  .loading-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,0.96);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    z-index:50;
+    text-align:center;
+    padding:20px;
+  }
+
+  .spinner{
+    width:40px;
+    height:40px;
+    border:4px solid var(--card);
+    border-top-color:var(--orange);
+    border-radius:50%;
+    animation:spin 0.8s linear infinite;
+  }
+
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .loading-overlay p{
+    font-size:19px;
+    font-weight:600;
+    color:var(--text);
+  }
+
+  /* ---------- Output / print document ---------- */
+
+  #outputView{ display:none; }
+
+  .doc{
+    max-width:720px;
+    margin:0 auto;
+    padding:24px 16px 40px;
+  }
+
+  .doc-header{
+    border-bottom:3px solid var(--text);
+    padding-bottom:16px;
+    margin-bottom:20px;
+  }
+
+  .doc-header h1{
+    font-size:34px;
+  }
+
+  .doc-header-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 24px;
+    margin-top:14px;
+    font-size:16px;
+  }
+
+  .doc-header-grid .dh-label{
+    color:var(--muted);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    font-weight:600;
+  }
+
+  .doc-header-grid .dh-value{
+    font-weight:600;
+    margin-bottom:6px;
+  }
+
+  .doc-week{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    margin-bottom:18px;
+  }
+
+  .doc-week h2{
+    font-size:24px;
+    margin-bottom:12px;
+  }
+
+  .doc-row{
+    display:flex;
+    gap:14px;
+    padding:8px 0;
+    border-top:1px solid var(--border);
+  }
+
+  .doc-row:first-of-type{ border-top:none; }
+
+  .doc-row .dr-label{
+    width:150px;
+    flex-shrink:0;
+    font-weight:600;
+    font-size:14px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    padding-top:1px;
+  }
+
+  .doc-row.fun .dr-label{ color:var(--orange); }
+  .doc-row.family .dr-label{ color:var(--blue); }
+  .doc-row.faith .dr-label{ color:var(--tan); }
+
+  .doc-row .dr-value{
+    flex:1;
+    font-size:16px;
+  }
+
+  .doc-value-empty{ color:var(--muted); font-style:italic; }
+
+  .doc-check{
+    font-size:16px;
+    display:block;
+    margin:2px 0;
+  }
+
+  .doc-sub-heading{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    font-weight:600;
+    color:var(--muted);
+    margin:4px 0 2px;
+  }
+
+  .doc-bucket, .doc-pastor{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px;
+    margin-bottom:18px;
+  }
+
+  .doc-bucket h2, .doc-pastor h2{
+    font-size:24px;
+    margin-bottom:12px;
+  }
+
+  .doc-activity-list, .doc-question-list{
+    margin:0 0 10px;
+    padding:0;
+    list-style:none;
+  }
+
+  .doc-activity-list li, .doc-question-list li{
+    font-size:16px;
+    padding:5px 0 5px 24px;
+    position:relative;
+  }
+
+  .doc-activity-list li::before{
+    content:"☑";
+    position:absolute;
+    left:0;
+    color:var(--orange);
+  }
+
+  .doc-question-list{ counter-reset:qnum; }
+
+  .doc-question-list li::before{
+    counter-increment:qnum;
+    content:counter(qnum) ".";
+    position:absolute;
+    left:0;
+    font-weight:700;
+  }
+
+  .pastor-checks{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    margin:6px 0 14px;
+  }
+
+  .pastor-checks span{ font-size:16px; }
+
+  .pastor-line{
+    border-bottom:1px solid var(--border);
+    height:30px;
+  }
+
+  .pastor-line:last-child{ border-bottom:none; }
+
+  .output-actions{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 16px 32px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .output-actions .btn{ flex:1; min-width:140px; }
+
+  /* ---------- Print ---------- */
+
+  @media print{
+    .no-print, .topbar, .action-bar, .loading-overlay{ display:none !important; }
+    #formView{ display:none !important; }
+    #outputView{ display:block !important; }
+    body{ padding-bottom:0; }
+    .doc-week, .doc-bucket, .doc-pastor{ break-inside:avoid; border-color:#ccc; }
+    .doc{ max-width:100%; padding:0; }
+  }
+
+  @media (max-width:420px){
+    .doc-row{ flex-direction:column; gap:2px; }
+    .doc-row .dr-label{ width:auto; }
+    .doc-header-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="eyebrow">Uproar Youth · U-Groups</div>
+  <h1>Monthly Plan<span class="accent">.</span></h1>
+</div>
+
+<!-- ================= FORM VIEW ================= -->
+<main id="formView">
+
+  <section class="card" id="groupHeaderCard">
+    <div class="card-title"><h2>Group Info</h2></div>
+    <p class="card-sub">One entry for your whole group — this only needs to be filled out once per month.</p>
+
+    <div class="field">
+      <label for="leaders">Group Leaders</label>
+      <input type="text" id="leaders" placeholder="e.g. Jordan Smith & Casey Lee">
+    </div>
+
+    <div class="field">
+      <label for="groupType">Group Type</label>
+      <select id="groupType">
+        <option value="">Select one…</option>
+        <option value="High School Group">High School Group</option>
+        <option value="Middle School (6-7-8) Group">Middle School (6-7-8) Group</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="monthSeason">Month / Season</label>
+      <input type="text" id="monthSeason" placeholder="e.g. Sep–Oct 2026">
+    </div>
+
+    <div class="field">
+      <label for="groupDates">Group Dates</label>
+      <input type="text" id="groupDates" placeholder="e.g. 9/28, 10/5, 10/12, 10/19">
+    </div>
+
+    <div class="field">
+      <label for="allGroupDate">"All Group" Date <span class="hint">If applicable</span></label>
+      <input type="text" id="allGroupDate" placeholder="e.g. 9/21">
+    </div>
+  </section>
+
+  <div id="weeksContainer"></div>
+
+  <!-- ============ Bucket List ============ -->
+  <section class="card" id="bucketCard">
+    <div class="card-title"><span class="card-icon">🪣</span><h2>Bucket List</h2></div>
+    <p class="bucket-note">Complete one bucket list activity bi-weekly (twice a month). Don't repeat an activity. Should involve 3–4 students, and include 2 spiritual questions.</p>
+
+    <div class="bucket-category">
+      <h3>🍕 Food &amp; Hangouts</h3>
+      <div class="bucket-options">
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba1" value="Taco Bell / McDonald's / ice cream / Target / Starbucks">
+          <label for="ba1">Taco Bell / McDonald's / ice cream / Target / Starbucks</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba2" value="Host pizza / nacho / pancake night">
+          <label for="ba2">Host pizza / nacho / pancake night</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba3" value="Bake or make a meal together">
+          <label for="ba3">Bake or make a meal together</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="bucket-category">
+      <h3>🎮 Chill Time</h3>
+      <div class="bucket-options">
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba4" value="Movie night with post-movie convo / drive-ins">
+          <label for="ba4">Movie night with post-movie convo / drive-ins</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba5" value="Game night (board games / Switch / card games)">
+          <label for="ba5">Game night (board games / Switch / card games)</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba6" value="TikTok / Reel night">
+          <label for="ba6">TikTok / Reel night</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="bucket-category">
+      <h3>🏞 Outdoor Vibes</h3>
+      <div class="bucket-options">
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba7" value="Park walk / Frisbee / hang">
+          <label for="ba7">Park walk / Frisbee / hang</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba8" value="Backyard bonfire with s'mores">
+          <label for="ba8">Backyard bonfire with s'mores</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba9" value="Pumpkin patch / apple picking / carve pumpkins">
+          <label for="ba9">Pumpkin patch / apple picking / carve pumpkins</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba10" value="Devo + snacks at sunset">
+          <label for="ba10">Devo + snacks at sunset</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="bucket-category">
+      <h3>🔥 Faith-Focused</h3>
+      <div class="bucket-options">
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba11" value="Worship & prayer night">
+          <label for="ba11">Worship &amp; prayer night</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba12" value="Go to a student's game and hang before/after">
+          <label for="ba12">Go to a student's game and hang before/after</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba13" value="Serve together (clean up / rake / write notes)">
+          <label for="ba13">Serve together (clean up / rake / write notes)</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" class="bucket-activity" id="ba14" value="Coffee and Bible study">
+          <label for="ba14">Coffee and Bible study</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="customIdea">✏️ Your Own Idea <span class="hint">Needs pastor approval — must involve 3–4 students and include 2 spiritual questions.</span></label>
+      <input type="text" id="customIdea" placeholder="Optional">
+    </div>
+
+    <div class="sub-block">
+      <div class="sub-block-title">Bucket List Questions — pick 2</div>
+
+      <div class="question-limit-note" id="questionLimitNote">0 of 2 selected</div>
+
+      <div class="question-level level-1">
+        <h3>🟢 Level 1 — Beginning Faith</h3>
+        <div class="bucket-options">
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q1" value="What do you think God thinks about you right now?"><label for="q1">What do you think God thinks about you right now?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q2" value="Why do you think Jesus wants a relationship with you?"><label for="q2">Why do you think Jesus wants a relationship with you?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q3" value="What's one question you have about the Bible or faith?"><label for="q3">What's one question you have about the Bible or faith?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q4" value="How do you know if someone is really following Jesus?"><label for="q4">How do you know if someone is really following Jesus?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q5" value="What's been the biggest change in your life since coming to Uproar?"><label for="q5">What's been the biggest change in your life since coming to Uproar?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q6" value="What's one thing you're curious about when it comes to God?"><label for="q6">What's one thing you're curious about when it comes to God?</label></div>
+        </div>
+      </div>
+
+      <div class="question-level level-2">
+        <h3>🟡 Level 2 — Growing Faith</h3>
+        <div class="bucket-options">
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q7" value="What's been hardest about following Jesus lately?"><label for="q7">What's been hardest about following Jesus lately?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q8" value="Do you ever struggle with doubt? What helps you stay grounded?"><label for="q8">Do you ever struggle with doubt? What helps you stay grounded?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q9" value="When was the last time you felt God speak to you?"><label for="q9">When was the last time you felt God speak to you?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q10" value="What's something God might be asking you to give up?"><label for="q10">What's something God might be asking you to give up?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q11" value="How do you know when God is growing you?"><label for="q11">How do you know when God is growing you?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q12" value="What part of your life are you trying to surrender more to God?"><label for="q12">What part of your life are you trying to surrender more to God?</label></div>
+        </div>
+      </div>
+
+      <div class="question-level level-3">
+        <h3>🔴 Level 3 — Mature Faith</h3>
+        <div class="bucket-options">
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q13" value="What do you think your spiritual gift is — and are you using it?"><label for="q13">What do you think your spiritual gift is — and are you using it?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q14" value="What is God refining or correcting in your life right now?"><label for="q14">What is God refining or correcting in your life right now?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q15" value="Who are you intentionally discipling or pouring into?"><label for="q15">Who are you intentionally discipling or pouring into?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q16" value="What area of your faith feels most alive — and which one feels dry?"><label for="q16">What area of your faith feels most alive — and which one feels dry?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q17" value="What legacy do you want to leave for God?"><label for="q17">What legacy do you want to leave for God?</label></div>
+          <div class="checkbox-row"><input type="checkbox" class="bucket-question" id="q18" value="What's one bold thing you believe God is asking you to do this season?"><label for="q18">What's one bold thing you believe God is asking you to do this season?</label></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="error-box no-print" id="errorBox" hidden></div>
+
+</main>
+
+<div class="action-bar no-print" id="formActionBar">
+  <div class="action-bar-inner">
+    <button class="btn btn-primary" id="generateBtn">Generate Plan</button>
+  </div>
+</div>
+
+<!-- ================= OUTPUT VIEW ================= -->
+<main id="outputView">
+  <div class="doc" id="docContent"></div>
+  <div class="output-actions no-print">
+    <button class="btn btn-secondary" id="backBtn">Back to Edit</button>
+    <button class="btn btn-primary" id="printBtn">Print / Save PDF</button>
+    <button class="btn btn-ghost" id="startOverBtn">Start Over</button>
+  </div>
+</main>
+
+<div class="loading-overlay no-print" id="loadingOverlay" hidden>
+  <div class="spinner"></div>
+  <p>Organizing your plan…</p>
+</div>
+
+<script>
+(function(){
+
+  var WEEK_COUNT = 4;
+  var weeksContainer = document.getElementById('weeksContainer');
+
+  // ---------- Build the 4 week sections from one template ----------
+  // Each week has the same 7 fields, so we generate the markup once per
+  // week instead of repeating it by hand.
+
+  function weekTemplate(n){
+    return '' +
+      '<section class="card week-card">' +
+        '<div class="card-title"><span class="week-number">' + n + '</span><h2>Week ' + n + '</h2></div>' +
+
+        '<div class="field">' +
+          '<label for="w' + n + '_location">📍 Location</label>' +
+          '<input type="text" id="w' + n + '_location" placeholder="Where is group happening?">' +
+        '</div>' +
+
+        '<div class="field">' +
+          '<label for="w' + n + '_dayTime">🕒 Day &amp; Time <span class="hint">Must be at least 1 hour</span></label>' +
+          '<input type="text" id="w' + n + '_dayTime" placeholder="e.g. Sunday 6:00–7:30pm">' +
+        '</div>' +
+
+        '<div class="field">' +
+          '<label for="w' + n + '_drivers">🚗 Available Drivers</label>' +
+          '<input type="text" id="w' + n + '_drivers" placeholder="Who can drive, and how many seats?">' +
+        '</div>' +
+
+        '<div class="field fun">' +
+          '<label for="w' + n + '_funHook">🎉 Fun Hook <span class="hint">What will make students excited to show up? Ex: Manhunt, $5 snack draft, TikTok challenge</span></label>' +
+          '<input type="text" id="w' + n + '_funHook" placeholder="This week&#39;s hook">' +
+        '</div>' +
+
+        '<div class="field family">' +
+          '<label for="w' + n + '_familyMoment">🫶 Family Moment <span class="hint">What will help students feel seen, known, connected? Ex: Highs/Lows, Team challenge, Hot Seat</span></label>' +
+          '<input type="text" id="w' + n + '_familyMoment" placeholder="This week&#39;s moment">' +
+        '</div>' +
+
+        '<div class="field faith">' +
+          '<label for="w' + n + '_faithLead">✝️ Faith / Catalog Lead</label>' +
+          '<input type="text" id="w' + n + '_faithLead" placeholder="Name">' +
+          '<div class="checkbox-row">' +
+            '<input type="checkbox" id="w' + n + '_prepTogether">' +
+            '<label for="w' + n + '_prepTogether">We will meet or text to prep together</label>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="sub-block">' +
+          '<div class="sub-block-title">📣 Communication Plan</div>' +
+
+          '<div class="field">' +
+            '<label for="w' + n + '_parentPlan">Parent communication &amp; how workload is split</label>' +
+            '<textarea id="w' + n + '_parentPlan" placeholder="e.g. Split parents in half, track in notes app"></textarea>' +
+            '<div class="checkbox-row"><input type="checkbox" id="w' + n + '_parentSendLocations"><label for="w' + n + '_parentSendLocations">We will send all locations and times in advance</label></div>' +
+            '<div class="checkbox-row"><input type="checkbox" id="w' + n + '_parentSendReminders"><label for="w' + n + '_parentSendReminders">We will send weekly reminders</label></div>' +
+          '</div>' +
+
+          '<div class="field">' +
+            '<label for="w' + n + '_studentPlan">Student communication &amp; how workload is split</label>' +
+            '<textarea id="w' + n + '_studentPlan" placeholder="e.g. Group chat, split students in notes app"></textarea>' +
+            '<div class="checkbox-row"><input type="checkbox" id="w' + n + '_studentTextEach"><label for="w' + n + '_studentTextEach">We will text, DM, or call each student before group each week</label></div>' +
+            '<div class="checkbox-row"><input type="checkbox" id="w' + n + '_studentChecklist"><label for="w' + n + '_studentChecklist">We will create a contact checklist</label></div>' +
+          '</div>' +
+
+          '<div class="field">' +
+            '<label for="w' + n + '_followUp">Follow-up tracking method</label>' +
+            '<input type="text" id="w' + n + '_followUp" placeholder="e.g. Shared note, screenshot checkmarks">' +
+          '</div>' +
+        '</div>' +
+      '</section>';
+  }
+
+  var weekHtml = '';
+  for (var i = 1; i <= WEEK_COUNT; i++){ weekHtml += weekTemplate(i); }
+  weeksContainer.innerHTML = weekHtml;
+
+  // ---------- Bucket question limit (max 2) ----------
+
+  var questionBoxes = Array.prototype.slice.call(document.querySelectorAll('.bucket-question'));
+  var limitNote = document.getElementById('questionLimitNote');
+
+  function updateQuestionLimit(){
+    var checked = questionBoxes.filter(function(cb){ return cb.checked; });
+    limitNote.textContent = checked.length + ' of 2 selected';
+    var atLimit = checked.length >= 2;
+    questionBoxes.forEach(function(cb){
+      if (!cb.checked) cb.disabled = atLimit;
+    });
+  }
+  questionBoxes.forEach(function(cb){ cb.addEventListener('change', updateQuestionLimit); });
+  updateQuestionLimit();
+
+  // ---------- Collect form data ----------
+
+  function val(id){
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function checked(id){
+    var el = document.getElementById(id);
+    return !!(el && el.checked);
+  }
+
+  function collectFormData(){
+    var weeks = [];
+    for (var n = 1; n <= WEEK_COUNT; n++){
+      weeks.push({
+        weekNumber: n,
+        location: val('w' + n + '_location'),
+        dayTime: val('w' + n + '_dayTime'),
+        drivers: val('w' + n + '_drivers'),
+        funHook: val('w' + n + '_funHook'),
+        familyMoment: val('w' + n + '_familyMoment'),
+        faithLead: val('w' + n + '_faithLead'),
+        prepTogether: checked('w' + n + '_prepTogether'),
+        parentPlan: val('w' + n + '_parentPlan'),
+        parentSendLocations: checked('w' + n + '_parentSendLocations'),
+        parentSendReminders: checked('w' + n + '_parentSendReminders'),
+        studentPlan: val('w' + n + '_studentPlan'),
+        studentTextEach: checked('w' + n + '_studentTextEach'),
+        studentChecklist: checked('w' + n + '_studentChecklist'),
+        followUp: val('w' + n + '_followUp')
+      });
+    }
+
+    var activities = Array.prototype.slice.call(document.querySelectorAll('.bucket-activity:checked'))
+      .map(function(cb){ return cb.value; });
+
+    var questions = questionBoxes.filter(function(cb){ return cb.checked; })
+      .map(function(cb){ return cb.value; });
+
+    return {
+      leaders: val('leaders'),
+      groupType: val('groupType'),
+      monthSeason: val('monthSeason'),
+      groupDates: val('groupDates'),
+      allGroupDate: val('allGroupDate'),
+      weeks: weeks,
+      bucketActivities: activities,
+      bucketCustomIdea: val('customIdea'),
+      bucketQuestions: questions
+    };
+  }
+
+  // ---------- Validation ----------
+
+  function validate(data){
+    var missing = [];
+    if (!data.leaders) missing.push('Group Leaders');
+    if (!data.groupType) missing.push('Group Type');
+    if (!data.monthSeason) missing.push('Month / Season');
+    if (!data.groupDates) missing.push('Group Dates');
+    data.weeks.forEach(function(w){
+      if (!w.location) missing.push('Week ' + w.weekNumber + ' Location');
+      if (!w.dayTime) missing.push('Week ' + w.weekNumber + ' Day & Time');
+    });
+    return missing;
+  }
+
+  // ---------- Render the print-ready document ----------
+
+  function esc(s){
+    var d = document.createElement('div');
+    d.textContent = s == null ? '' : s;
+    return d.innerHTML;
+  }
+
+  function valOrEmpty(s){
+    return s ? esc(s) : '<span class="doc-value-empty">Not specified</span>';
+  }
+
+  function checkLine(isChecked, text){
+    return '<span class="doc-check">' + (isChecked ? '☑' : '☐') + ' ' + esc(text) + '</span>';
+  }
+
+  function renderDoc(data){
+    var h = data.header;
+    var html = '';
+
+    html += '<div class="doc-header">' +
+      '<h1>U-Group Monthly Plan</h1>' +
+      '<div class="doc-header-grid">' +
+        '<div><div class="dh-label">Leaders</div><div class="dh-value">' + valOrEmpty(h.leaders) + '</div></div>' +
+        '<div><div class="dh-label">Group Type</div><div class="dh-value">' + valOrEmpty(h.groupType) + '</div></div>' +
+        '<div><div class="dh-label">Month / Season</div><div class="dh-value">' + valOrEmpty(h.monthSeason) + '</div></div>' +
+        '<div><div class="dh-label">Group Dates</div><div class="dh-value">' + valOrEmpty(h.groupDates) + '</div></div>' +
+        (h.allGroupDate ? '<div><div class="dh-label">All Group Date</div><div class="dh-value">' + esc(h.allGroupDate) + '</div></div>' : '') +
+      '</div>' +
+    '</div>';
+
+    data.weeks.forEach(function(w){
+      html += '<div class="doc-week">' +
+        '<h2>Week ' + w.weekNumber + '</h2>' +
+
+        '<div class="doc-row"><div class="dr-label">📍 Location</div><div class="dr-value">' + valOrEmpty(w.location) + '</div></div>' +
+        '<div class="doc-row"><div class="dr-label">🕒 Day &amp; Time</div><div class="dr-value">' + valOrEmpty(w.dayTime) + '</div></div>' +
+        '<div class="doc-row"><div class="dr-label">🚗 Drivers</div><div class="dr-value">' + valOrEmpty(w.drivers) + '</div></div>' +
+        '<div class="doc-row fun"><div class="dr-label">🎉 Fun Hook</div><div class="dr-value">' + valOrEmpty(w.funHook) + '</div></div>' +
+        '<div class="doc-row family"><div class="dr-label">🫶 Family Moment</div><div class="dr-value">' + valOrEmpty(w.familyMoment) + '</div></div>' +
+        '<div class="doc-row faith"><div class="dr-label">✝️ Faith Lead</div><div class="dr-value">' +
+          valOrEmpty(w.faithLead) +
+          checkLine(w.prepTogether, 'We will meet or text to prep together') +
+        '</div></div>' +
+        '<div class="doc-row"><div class="dr-label">📣 Parents</div><div class="dr-value">' +
+          valOrEmpty(w.parentPlan) +
+          checkLine(w.parentSendLocations, 'Send all locations and times in advance') +
+          checkLine(w.parentSendReminders, 'Send weekly reminders') +
+        '</div></div>' +
+        '<div class="doc-row"><div class="dr-label">📣 Students</div><div class="dr-value">' +
+          valOrEmpty(w.studentPlan) +
+          checkLine(w.studentTextEach, 'Text, DM, or call each student before group') +
+          checkLine(w.studentChecklist, 'Create a contact checklist') +
+        '</div></div>' +
+        '<div class="doc-row"><div class="dr-label">Follow-Up</div><div class="dr-value">' + valOrEmpty(w.followUp) + '</div></div>' +
+      '</div>';
+    });
+
+    var bl = data.bucketList;
+    html += '<div class="doc-bucket"><h2>🪣 Bucket List</h2>';
+    if (bl.activities && bl.activities.length){
+      html += '<div class="doc-sub-heading">Selected Activities</div><ul class="doc-activity-list">' +
+        bl.activities.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>';
+    } else {
+      html += '<p class="doc-value-empty">No activity selected yet.</p>';
+    }
+    if (bl.customIdea){
+      html += '<div class="doc-sub-heading">Custom Idea (needs pastor approval)</div><p>' + esc(bl.customIdea) + '</p>';
+    }
+    if (bl.questions && bl.questions.length){
+      html += '<div class="doc-sub-heading">Chosen Questions</div><ul class="doc-question-list">' +
+        bl.questions.map(function(q){ return '<li>' + esc(q) + '</li>'; }).join('') + '</ul>';
+    } else {
+      html += '<p class="doc-value-empty">No questions selected yet.</p>';
+    }
+    html += '</div>';
+
+    html += '<div class="doc-pastor"><h2>Pastor Notes</h2>' +
+      '<div class="pastor-checks">' +
+        '<span>☐ Looks Good</span><span>☐ Follow Up Needed</span><span>☐ Great Work</span>' +
+      '</div>' +
+      '<div class="pastor-line"></div><div class="pastor-line"></div><div class="pastor-line"></div>' +
+    '</div>';
+
+    document.getElementById('docContent').innerHTML = html;
+  }
+
+  // ---------- Wire up buttons ----------
+
+  var formView = document.getElementById('formView');
+  var outputView = document.getElementById('outputView');
+  var formActionBar = document.getElementById('formActionBar');
+  var loadingOverlay = document.getElementById('loadingOverlay');
+  var errorBox = document.getElementById('errorBox');
+  var generateBtn = document.getElementById('generateBtn');
+
+  function showError(msg){
+    errorBox.textContent = msg;
+    errorBox.hidden = false;
+    errorBox.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+
+  generateBtn.addEventListener('click', function(){
+    errorBox.hidden = true;
+    var data = collectFormData();
+    var missing = validate(data);
+    if (missing.length){
+      showError('Please fill in: ' + missing.join(', '));
+      return;
+    }
+
+    loadingOverlay.hidden = false;
+    generateBtn.disabled = true;
+
+    fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(res){
+      return res.json().then(function(body){
+        if (!res.ok) throw new Error(body.error || 'Something went wrong.');
+        return body;
+      });
+    })
+    .then(function(result){
+      renderDoc(result);
+      formView.style.display = 'none';
+      formActionBar.style.display = 'none';
+      outputView.style.display = 'block';
+      window.scrollTo(0,0);
+    })
+    .catch(function(err){
+      showError(err.message || 'Something went wrong generating the plan. Please try again.');
+    })
+    .finally(function(){
+      loadingOverlay.hidden = true;
+      generateBtn.disabled = false;
+    });
+  });
+
+  document.getElementById('backBtn').addEventListener('click', function(){
+    outputView.style.display = 'none';
+    formView.style.display = 'block';
+    formActionBar.style.display = 'block';
+    window.scrollTo(0,0);
+  });
+
+  document.getElementById('printBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('startOverBtn').addEventListener('click', function(){
+    if (!confirm('Clear the whole form and start over?')) return;
+    document.querySelectorAll('input[type="text"], textarea').forEach(function(el){ el.value = ''; });
+    document.querySelectorAll('select').forEach(function(el){ el.value = ''; });
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(el){ el.checked = false; el.disabled = false; });
+    updateQuestionLimit();
+    outputView.style.display = 'none';
+    formView.style.display = 'block';
+    formActionBar.style.display = 'block';
+    errorBox.hidden = true;
+    window.scrollTo(0,0);
+  });
+
+})();
+</script>
+
+</body>
+</html>
