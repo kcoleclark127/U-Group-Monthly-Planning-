@@ -356,7 +356,6 @@
     position:fixed;
     inset:0;
     background:rgba(255,255,255,0.96);
-    display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
@@ -364,6 +363,13 @@
     z-index:50;
     text-align:center;
     padding:20px;
+  }
+
+  /* Only apply flex layout when the element is NOT hidden — otherwise this
+     rule overrides the browser's built-in [hidden] { display:none } and the
+     overlay stays visible permanently regardless of the JS toggling it. */
+  .loading-overlay:not([hidden]){
+    display:flex;
   }
 
   .spinner{
